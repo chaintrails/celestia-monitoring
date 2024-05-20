@@ -1,2 +1,2 @@
-# celestia-bridgenode-monitoring
-Repo related to bridge node monitoring setups.
+# celestia-da-monitoring
+Repo related to node monitoring setups.
