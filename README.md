@@ -1,48 +1,11 @@
-# celestia-da-monitoring
-Repo related to node monitoring setups.
-# Architecture
+# Celestia Monitoring
+Unified Monitoring Setups for Celestia Nodes
+# Architecture 
+### [Reference](https://docs-celestia.chaintrails.io/monitoring/architecture.html)
 
 ## A Bird's Eye View
+![Arch](./assets/arch-2.png)
 
-```mermaid
-graph TD
-    subgraph "Celestia Consensus Node(s) (Full / Validator)"
-        C[Consensus Node] -->|Node / Prometheus Metrics| D{ Sidecar Collector}
-        TT[Telegraf] -->|Host Metrics / Line Protocol| D
-    end
-    subgraph "Celestia (DA) Node(s)"
-        A[Bridge Node] -->|Node / OTLP Metrics| B{Sidecar Collector}
-        T[Telegraf] -->|Host Metrics / Line Protocol| B
-    end
-    
-    subgraph " "
-        I((Central Collector))
-    end
-    subgraph " "
-        F((Foundation's Collector))
-    end
-    
-    subgraph "Backends"
-        PP[(Prometheus)]
-        J[(Victoria Metrics)]
-        K[(Clickhouse)]
-        L[(Influx)]
-    end
-    subgraph "Monitoring"
-        U>Grafana]
-        AA>Alert Manager]
-    end
-    D --> |Node + Host / OTLP Metrics| I
-    B --> |Node + Host / OTLP Metrics| I
-    B --> |Node / OTLP Metrics| F
-    I -.-> |Prometheus Metrics| PP
-    I --> |Prometheus Metrics| J
-    I -.-> |OTLP Metrics| K
-    I -.-> |Line Protocol| L
-    J --> U
-    J --> AA
-    
-```
 ## High-Level Components
 
 ### OpenTelemetry Collector
@@ -69,3 +32,4 @@ graph TD
 ### Prometheus Format
 - Standard protocol for Prometheus metrics.
 - Metrics are typically exposed via the `/metrics` endpoint
+### 
