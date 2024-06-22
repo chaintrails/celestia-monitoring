@@ -13,7 +13,7 @@ Unified Monitoring Setups for Celestia Nodes
 
 ### Sidecar Collector
 - Streamlines the metrics collection.
-- Run's the OpenTelemetry collector on the same machine as the node.
+- Run's the collector on the same machine as node.
   
 ### Central Collector
 - Handle's the aggregation of metrics from multiple sidecar collectors.
