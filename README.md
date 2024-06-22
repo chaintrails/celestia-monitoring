@@ -8,15 +8,13 @@ Unified Monitoring Setups for Celestia Nodes
 
 ## High-Level Components
 
-### OpenTelemetry Collector
-- Streamlines the collection and delivery of metrics.
-
 ### Telegraf Agent
 - Collect's host-level metrics and run additional scripts to derive specific metrics.
 
 ### Sidecar Collector
+- Streamlines the metrics collection.
 - Run's the OpenTelemetry collector on the same machine as the node.
-
+  
 ### Central Collector
 - Handle's the aggregation of metrics from multiple sidecar collectors.
 - Ideally deployed behind a load balancer to distribute the load and for HA.
