@@ -1,0 +1,37 @@
+receivers:
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: 'celestia-consensus-node'
+          scrape_interval: 30s
+          static_configs:
+            - targets: ['localhost:26660']
+  influxdb:
+    endpoint: localhost:8080
+  otlp:
+    protocols:
+      grpc:
+        endpoint: localhost:4317
+      http:
+        endpoint: localhost:4318
+processors:
+  batch:
+    send_batch_size: 100
+    timeout: 10s
+exporters:
+  otlphttp/self:
+    endpoint: collector_host:collector_port 
+    tls:
+      insecure: true
+  logging:
+    loglevel: info
+service:
+  pipelines:
+    metrics/node:
+      receivers: [prometheus]
+      processors: [batch]
+      exporters: [logging, otlphttp/self]
+    metrics/host:
+      receivers: [influxdb]
+      processors: [batch]
+      exporters: [logging, otlphttp/self]
